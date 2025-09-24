@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electromagnetic Induction – Science Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #fffaeb;
+            background-color: #181817;
+            transition: all 0.3s ease;
+        }
+        
+        /* Header and Navigation */
+        header {
+            background-color: #000000;
+            color: #FFD700;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FFD700;
+        }
+        
+        .desktop-nav {
+            display: none;
+        }
+        
+        .desktop-nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .desktop-nav li {
+            margin: 0 0.5rem;
+        }
+        
+        .desktop-nav a {
+            color: #FFD700;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .desktop-nav a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+        }
+        
+        /* Mobile Nav Toggle */
+        .mobile-nav-toggle {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #FFD700;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+        }
+        
+        .mobile-nav li {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: block;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .mobile-nav a:hover {
+            padding-left: 1rem;
+            color: #fff;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: #000;
+            color: #FFD700;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Sections */
+        section {
+            padding: 3rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section h2 {
+            color: #FFD700;
+            position: relative;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: #FFD700;
+        }
+        
+        /* Section Dividers */
+        section:not(:first-of-type) {
+            border-top: 1px solid #FFD700;
+        }
+        
+        /* Content Styles */
+        .content {
+            text-align: left;
+        }
+        
+        ul, ol {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Image Placeholder */
+        .image-placeholder {
+            background-color: #f5f5f5;
+            border: 2px dashed #FFD700;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            color: #666;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #000;
+            color: #FFD700;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .qr-placeholder {
+            background-color: #f0f0f0;
+            border: 2px dashed #FFD700;
+            height: 100px;
+            width: 100px;
+            margin: 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            color: #666;
+        }
+        
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .mobile-nav-toggle {
+                display: none;
+            }
+            
+            .desktop-nav {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            section {
+                padding: 4rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">Science Project</div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#materials">Materials</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <li><a href="#applications">Applications</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="mobile-nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#materials">Materials & Setup</a></li>
+                <li><a href="#methodology">Methodology</a></li>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#applications">Applications</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Electromagnetic Induction – Science Project</h1>
+        <p>Exploring the principles and applications</p>
+    </section>
+
+    <!-- Content Sections -->
+    <section id="introduction" class="content">
+        <h2>Introduction</h2>
+        <p>Electromagnetic induction is the process by which a changing magnetic field induces an electromotive force (EMF) in a conductor. This fundamental principle, discovered by Michael Faraday in 1831, forms the basis for many electrical technologies we use today, from power generation to electric motors.</p>
+        <p>In this project, we explore how electromagnetic induction works, demonstrate it through simple experiments, and examine its practical applications in modern technology.</p>
+    </section>
+
+    <section id="materials" class="content">
+        <h2>Materials & Setup</h2>
+        <ul>
+            <li>Neodymium magnets (various sizes)</li>
+            <li>Copper wire coil (200+ turns)</li>
+            <li>Galvanometer or multimeter</li>
+            <li>Cardboard tube (for winding coil)</li>
+            <li>Electrical leads with alligator clips</li>
+            <li>Iron rod or nail (for core)</li>
+            <li>LED light (for visual indicator)</li>
+            <li>Permanent bar magnet</li>
+        </ul>
+    </section>
+
+    <section id="methodology" class="content">
+        <h2>Methodology</h2>
+        <ol>
+            <li>Wind the copper wire around the cardboard tube to create a coil with multiple turns</li>
+            <li>Connect the ends of the coil to the galvanometer or multimeter</li>
+            <li>Quickly move a magnet in and out of the coil and observe the meter deflection</li>
+            <li>Experiment with different speeds and strengths of magnets</li>
+            <li>Insert an iron core into the coil and repeat the experiments</li>
+            <li>Record observations of induced current direction and magnitude</li>
+        </ol>
+    </section>
+
+    <section id="results" class="content">
+        <h2>Results</h2>
+        <p>The experiments demonstrated that an electric current is induced in the coil only when the magnetic field through it is changing. Faster movement of the magnet produced greater induced current, and using an iron core significantly amplified the effect due to its higher magnetic permeability.</p>
+        <div class="image-placeholder">
+            Experimental Setup Diagram
+        </div>
+        <p>The direction of the induced current followed Lenz's Law, always opposing the change in magnetic flux that produced it. Quantitative measurements showed a clear relationship between the rate of change of magnetic flux and the magnitude of induced EMF.</p>
+    </section>
+
+    <section id="applications" class="content">
+        <h2>Applications</h2>
+        <p>Electromagnetic induction has numerous practical applications in modern technology:</p>
+        <ul>
+            <li><strong>Electrical generators</strong> - Convert mechanical energy to electrical energy</li>
+            <li><strong>Transformers</strong> - Step up or step down AC voltages</li>
+            <li><strong>Induction cooking</strong> - Heat generation in cookware</li>
+            <li><strong>Wireless charging</strong> - Power transfer without physical connection</li>
+            <li><strong>Electric guitars</strong> - Pickups convert string vibrations to electrical signals</li>
+            <li><strong>Metal detectors</strong> - Identify metallic objects through induced currents</li>
+        </ul>
+    </section>
+
+    <section id="conclusion" class="content">
+        <h2>Conclusion</h2>
+        <p>Through this project, we've demonstrated the fundamental principles of electromagnetic induction and verified Faraday's Law. The experiments confirmed that a changing magnetic field induces an electromotive force in a conductor, with the magnitude proportional to the rate of change of magnetic flux.</p>
+        <p>This phenomenon underpins much of our modern electrical infrastructure and continues to enable new technologies. Understanding electromagnetic induction is essential for appreciating how we generate and distribute electrical power, and it opens possibilities for future innovations in energy and technology.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Science Fair Project – Electromagnetic Induction</p>
+        <div class="qr-placeholder">
+            QR Code Placeholder
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+            
+            // Toggle mobile navigation
+            mobileNavToggle.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+                
+                // Change icon based on menu state
+                const icon = this.querySelector('i');
+                if (mobileNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Close mobile nav when a link is clicked
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.remove('active');
+                    const icon = mobileNavToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+            
+            // Close mobile nav when clicking outside
+            document.addEventListener('click', function(event) {
+                if (mobileNav.classList.contains('active') && 
+                    !mobileNav.contains(event.target) && 
+                    !mobileNavToggle.contains(event.target)) {
+                    mobileNav.classList.remove('active');
+                    const icon = mobileNavToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
