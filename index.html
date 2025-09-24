@@ -16,14 +16,19 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #fffaeb;
-            background-color: #181817;
+            color: #000;
+            background-color: #fff;
             transition: all 0.3s ease;
+        }
+        
+        /* Prevent body scrolling when menu is open */
+        body.menu-open {
+            overflow: hidden;
         }
         
         /* Header and Navigation */
         header {
-            background-color: #000000;
+            background-color: #000;
             color: #FFD700;
             position: sticky;
             top: 0;
@@ -151,7 +156,7 @@
         }
         
         section h2 {
-            color: #FFD700;
+            color: #000;
             position: relative;
             padding-bottom: 0.75rem;
             margin-bottom: 1.5rem;
@@ -369,9 +374,13 @@
                 if (mobileNav.classList.contains('active')) {
                     icon.classList.remove('fa-bars');
                     icon.classList.add('fa-times');
+                    // Block body scrolling
+                    document.body.classList.add('menu-open');
                 } else {
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
+                    // Restore body scrolling
+                    document.body.classList.remove('menu-open');
                 }
             });
             
@@ -382,6 +391,8 @@
                     const icon = mobileNavToggle.querySelector('i');
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
+                    // Restore body scrolling
+                    document.body.classList.remove('menu-open');
                 });
             });
             
@@ -394,6 +405,8 @@
                     const icon = mobileNavToggle.querySelector('i');
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
+                    // Restore body scrolling
+                    document.body.classList.remove('menu-open');
                 }
             });
         });
